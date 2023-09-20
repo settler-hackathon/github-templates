@@ -22,7 +22,6 @@ jobs:
       contents: read
       packages: write
     name: Push Image
-    needs: build-image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
