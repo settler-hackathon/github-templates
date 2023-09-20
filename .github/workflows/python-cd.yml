@@ -6,9 +6,6 @@ on:
         python-version:
           required: true
           type: string
-        PYTHON_DEPLOYMENT_VERSION:
-          required: true
-          type: string
         ENV:
           required: true
           type: string
@@ -17,7 +14,6 @@ on:
           type: string
 
 env:
-  PYTHON_DEPLOYMENT_VERSION: ${{ inputs.python-version }}
   ENV: ${{ inputs.ENV }}
 
 jobs:
@@ -46,27 +42,3 @@ jobs:
            docker run  ghcr.io/${{ github.repository_owner }}/${{ inputs.REPO-NAME }}_${{ inputs.python-version }}:latest pytest
       - name: Confirmation that all went fine
         run: echo All went ok!
-  push-image:
-    if: ${{ inputs.python-version }} == ${{ inputs.PYTHON_DEPLOYMENT_VERSION }}
-    permissions:
-      contents: read
-      packages: write
-    name: Push Image
-    needs: build-image
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-      - name: Build Docker Image
-        env:
-            DOCKER_BUILD_NUMBER: ${{ github.run_number }}
-        run: |
-          docker build --build-arg PYTHON_VERSION=$PYTHON_DEPLOYMENT_VERSION --build-arg ENV=$ENV -t ghcr.io/${{ github.repository_owner }}/${{ inputs.REPO-NAME }}:${DOCKER_BUILD_NUMBER} -t ghcr.io/${{ github.repository_owner }}/${{ inputs.REPO-NAME }}:latest .
-      - name: Login to GHCR
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
-      - name: Push Docker Image
-        env:
-            DOCKER_BUILD_NUMBER: ${{ github.run_number }}
-        run: |
-          docker push ghcr.io/${{ github.repository_owner }}/${{ inputs.REPO-NAME }} --all-tags
-
