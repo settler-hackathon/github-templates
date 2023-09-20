@@ -8,7 +8,7 @@ on:
     inputs:
       python-version:
         required: true
-        type: list
+        type: string
 
 jobs:
   build:
