@@ -18,7 +18,7 @@ on:
 
 env:
   PYTHON_DEPLOYMENT_VERSION: ${{ inputs.python-version }}
-  ENV: ${{ inputs.python-version }}
+  ENV: ${{ inputs.ENV }}
 
 jobs:
   build-image:
