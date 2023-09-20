@@ -12,11 +12,14 @@ on:
         ENV:
           required: true
           type: string
+        REPO-NAME:
+          required: true
+          type: string
 
 env:
   PYTHON_DEPLOYMENT_VERSION: ${{ inputs.python-version }}
   ENV: ${{ inputs.python-version }}
-  REPO: ${{ github.event.repository.name }}
+  REPO: ${{ REPO-NAME }}
 
 jobs:
   build-image:
