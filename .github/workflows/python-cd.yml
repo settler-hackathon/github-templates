@@ -19,7 +19,7 @@ on:
 env:
   PYTHON_DEPLOYMENT_VERSION: ${{ inputs.python-version }}
   ENV: ${{ inputs.python-version }}
-  REPO: ${{ REPO-NAME }}
+  REPO: ${{ inputs.REPO-NAME }}
 
 jobs:
   build-image:
