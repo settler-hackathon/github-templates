@@ -1,1 +1,7 @@
-
+{
+  "name": "Python CI Workflow",
+  "description": "CI workflow template for Project projects.",
+  "iconName": "example-icon",
+  "categories": ["Python"],
+  "filePatterns": ["package.json$"]
+}
