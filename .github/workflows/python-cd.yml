@@ -45,7 +45,6 @@ jobs:
       - name: Confirmation that all went fine
         run: echo All went ok!
   push-image:
-    if: $ENV == $python-version
     permissions:
       contents: read
       packages: write
