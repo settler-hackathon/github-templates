@@ -47,7 +47,7 @@ jobs:
       - name: Confirmation that all went fine
         run: echo All went ok!
   push-image:
-    if: ${{ inputs.python-version }} == ${{ inputs.PYTHON_DEPLOYMENT_VERSION }}
+    if: ${{ inputs.python-version }} == ${{ inputs.PYTHON_DEPLOYMENT_VERSION }} && success()
     permissions:
       contents: read
       packages: write
